@@ -1,11 +1,11 @@
-### LONDON FLAT FINDER
+# LONDON FLAT FINDER
 This project is currently at the prototype stage. It’s purpose is to alleviate both the stress and temporal burden when trying to find affordable accommodation in London. The piece of functionality that adds value as opposed to other property listing aggregators is essentially detecting duplicate listings and providing the user with the cheapest of them for the same property.
-## How it’s Made
-# Technologies: Jsoup, Hibernate, Jakarta, SpringBoot, React
+# How it’s Made
+### Technologies: Jsoup, Hibernate, Jakarta, SpringBoot, React
 From the input form on the front end, the app reconforms the parameters to match the URL patterns for various property listing sites, which it then scrapes details from using Jsoup. The details from the respective listings are consolidated in a Hibernate Entity, which allows the data to be accessed from for sanitisation. Once sanitized, a custom JPA query is used to filter out other entities that represent the same property listed at a higher price point. 
 
-### Optimizations
-# Future Improvements and Features
+# Optimizations
+### Future Improvements and Features
 In order to increase the efficacy of the filtering, I want to implement a more stringent and rigid sanitizing process for the entity fields which are used to determine whether a listing is a duplicate. At the current moment the sanitisation of the address for example relies on the standard formatting of “Street, Area, Postcode”, once “London” has been removed. While this does a sufficient job for most cases, common misformatting can cause inaccuracies in the listing comparisons. A solution involving a set of common location based terms such as ‘Street’, ‘Avenue’, etc. could be used to determine the location of the street address within the address field, but may be too computationally expensive and cause longer wait times for results. 
 
 An area of optimisation that I dabbled with but decided would be better left for a later screenshot/version of the app is using Java’s Futures to enable multithreading for the scrapers and implement polling for get requests to the backend. This would greatly decrease the resource demands if the app scales, and overall processing time, as the results between property listing sites being scraped varies, and so being able to dynamically select which to scrape would allow for a smoother user experience. Polling would be a better fitting solution to the problem of waiting for the backend processing to complete before firing a get request, as a crude fix elemented at the moment is simply timing out the render of the react components that rely on the get request data.
